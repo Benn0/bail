@@ -50,6 +50,7 @@ grails.project.dependency.resolution = {
         compile 'org.apache.pdfbox:pdfbox:1.8.1'
         //compile 'javax.media:jai-core:1.1.3'
         //compile 'org.jadira.usertype:usertype.jodatime:1.9'
+        compile 'joda-time:joda-time:2.2'
     }
 
     plugins {
@@ -67,6 +68,5 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.2"
 
         compile ':cache:1.0.1'
-        compile ":joda-time:1.4"
     }
 }
