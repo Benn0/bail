@@ -9,37 +9,80 @@ app.config(function($routeProvider) {
 });
 
 
-app.factory('popupService', function($http) {
+app.factory('popupService', function($http, $rootScope, $compile, $controller) {
     var popupBorderWidth = 3;
 
     var PopupService = {
 
-        show: function(uiComponent) {
+        popups: [
+            {
+                name: "NewEmail",
+                templateUrl: "partials/emailPopup.html",
+                controller: "NewEmailCtrl"
+            }
+        ],
 
+        focusedItemCssClass: "focusedItem",
+
+        findSettingsFor: function (popupName) {
+            $(this.popups).each(function() {
+                if(this.name === popupName) {
+                    return this;
+                }
+                return null;
+            });
+        },
+
+        show: function(uiComponent, popupName) {
             var position = uiComponent.offset();
             var width = uiComponent[0].offsetWidth;
             var height = uiComponent[0].offsetHeight;
 
-            var popup = this.createPopup(position.top, position.left, height, width);
+            var settings = this.findSettingsFor(popupName);
+            var popup = this.createPopup(position.top, position.left, height, width, uiComponent, settings);
 
-            uiComponent.addClass("focusedItem");
+            uiComponent.addClass(this.focusedItemCssClass);
+
+            var link = $compile(popup.div.contents());
+            var lastScope = this.createScope(popup);
+            var locals = {
+                $scope: lastScope
+            };
+            controller = $controller(settings.controller, locals);
+            popup.div.children().data('$ngControllerController', controller);
+
+            link(lastScope);
         },
 
-        createPopup: function(top, left, height, width) {
+        createScope: function(popup) {
+            var lastScope;
+
+            lastScope = $rootScope.$new();
+
+            lastScope.popup = popup;
+            lastScope.close = function () {
+                this.popup.div.remove();
+                this.popup.div = null;
+                this.popup.itemHighlighter.remove();
+                this.popup.itemHighlighter = null;
+                this.popup.element.removeClass(this.focusedItemCssClass);
+                this.popup.element = null;
+                this.$destroy();
+            };
+            return lastScope;
+        },
+
+        createPopup: function(top, left, height, width, uiComponent, settings) {
             var popupTop = top + height - popupBorderWidth;
             var popupLeft = left - popupBorderWidth;
 
             var popup = {
-                div: jQuery(this.template),
-                itemHighlighter: jQuery("<div></div>"),
-
-                close: function() {
-                    this.div.remove();
-                    this.itemHighlighter.remove();
-                }
+                div: $(this.template),
+                itemHighlighter: $("<div></div>"),
+                element: uiComponent
             };
 
-            var body = jQuery("body");
+            var body = $("body");
             body.append(popup.div);
             body.append(popup.itemHighlighter);
 
@@ -49,6 +92,8 @@ app.factory('popupService', function($http) {
             popup.itemHighlighter.offset( { top: top - popupBorderWidth, left: left - popupBorderWidth } );
             popup.itemHighlighter.width(width);
             popup.itemHighlighter.height(height);
+
+            return popup;
         }
     };
 

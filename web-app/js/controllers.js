@@ -94,3 +94,30 @@ function MainCtrl($scope, $rootScope, $http, popupService) {
     };
 }
 MainCtrl.$inject = ['$scope', '$rootScope', '$http', 'popupService'];
+
+
+
+
+function NewEmailCtrl($scope) {
+
+    var data = {items: [
+        {value: "21", name: "Mick Jagger"},
+        {value: "43", name: "Johnny Storm"},
+        {value: "46", name: "Richard Hatch"},
+        {value: "54", name: "Kelly Slater"},
+        {value: "55", name: "Rudy Hamilton"},
+        {value: "79", name: "Michael Jordan"}
+    ]};
+
+    $scope.popup.div.find("#to").autoSuggest(data.items, {
+            selectedItemProp: "name",
+            searchObjProps: "name",
+            minChars: 3,
+            startText:"" }
+    );
+
+    $scope.popup.div.find("input[name='to']").watermark("Enter recipients here...");
+
+    $scope.popup.div.find("#subject").watermark("Subject...");
+}
+NewEmailCtrl.$inject = ['$scope'];

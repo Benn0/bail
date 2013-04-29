@@ -1,9 +1,12 @@
 <div class="popup">
-    <div class="header"><h1>New E-Mail</h1></div>
+    <div class="header">
+        <h1>New E-Mail <span class="right"><a href data-ng-click="close()">cancel</a></span></h1>
+    </div>
     <div class="content">
         <form>
             <input id="to" type="text" name="to"/>
-            <input data-watermark="Subject..." class="textField" id="subject" type="text" name="subject"/>
+            <input class="textField" id="subject" type="text" name="subject"/>
         </form>
+
     </div>
 </div>

@@ -125,6 +125,11 @@ div.popup .header {
     background-color: #9dd7ff;
 }
 
+div.popup .header .right {
+    float: right;
+    font-size: 0.9em;
+}
+
 .focusedItem {
     background-color: #9dd7ff;
 }
