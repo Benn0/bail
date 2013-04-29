@@ -1,0 +1,14 @@
+<div class="messageView">
+    <div class="header">
+        <h1>{{message.subject}}</h1>
+    </div>
+    <div class="content">
+        <ul class="emailHeader">
+            <li>From: {{message.from}}</li>
+            <li>Sent: {{message.sent | date:'medium'}}</li>
+        </ul>
+        <hr/>
+        <p data-ng-bind-html-unsafe="message.htmltext">
+        </p>
+    </div>
+</div>

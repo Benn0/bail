@@ -1,0 +1,18 @@
+
+.topicView .message {
+    margin-bottom: 2em;
+}
+
+.topicView .message .sender {
+    font-weight: bold;
+}
+
+.topicView .message .date {
+    color: gray;
+    font-size: 0.9em;
+    float: right;
+}
+
+.topicView .message .detaillink {
+    font-size: 0.8em;
+}

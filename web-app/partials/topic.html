@@ -1,0 +1,14 @@
+<div class="topicView">
+    <div class="header">
+        <h1>{{topic.title}}</h1>
+    </div>
+    <div class="content">
+        <div class="message" data-ng-repeat="email in topic.emails">
+            <span class="sender">{{email.sender}}</span>
+            <span class="date">{{email.date | date:'medium'}}</span>
+            <p data-ng-bind-html-unsafe="email.text">
+            </p>
+            <a href data-ng-show="email.convertedFromHtml" data-ng-click="showOriginal()" class="detaillink">Original HTML message...</a>
+        </div>
+    </div>
+</div>

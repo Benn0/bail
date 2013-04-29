@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" data-ng-app="app">
+<head>
+    <link rel="stylesheet" href="css/ext/autoSuggest.css" type="text/css" />
+    <link rel="stylesheet" href="css/bail.css" type="text/css" />
+    <link rel="stylesheet" href="css/messageView.css" type="text/css" />
+    <link rel="stylesheet" href="css/topicList.css" type="text/css" />
+    <link rel="stylesheet" href="css/topicView.css" type="text/css" />
+    <title></title>
+</head>
+<body data-ng-controller="MainCtrl">
+
+    <div class="north">
+        <button id="newEmailButton"
+                title="New e-mail"
+                class="imageButton"
+                data-ng-click="newEmail()">
+            <img src="images/stylistica_iconset/32x32/mail.png"/>
+        </button>
+
+        <button title="Check for new e-mails"
+                data-ng-disabled="checkForEmailsDisabled"
+                class="imageButton"
+                data-ng-click="checkForEmails()">
+            <img data-ng-class="cssClass" src="images/stylistica_iconset/32x32/refresh.png"/>
+        </button>
+
+        <button title="Manage contacts"
+                class="imageButton"
+                data-ng-click="contacts()">
+            <img src="images/stylistica_iconset/32x32/id_card.png"/>
+        </button>
+
+        <button title="Manage settings"
+                class="imageButton"
+                data-ng-click="settings()">
+            <img src="images/stylistica_iconset/32x32/settings.png"/>
+        </button>
+    </div>
+
+    <div class="center" data-ng-view>
+    </div>
+
+    <div class="west">
+        <div class="topicList" data-ng-controller="TopicListCtrl">
+            <ul>
+                <li data-ng-repeat="topic in topics">
+                    <div class="cell" data-ng-click="onSelect(topic)" data-ng-class="topic.cssclass">
+                        <span class="title">{{topic.title}}</span>
+                        <span class="participants">{{topic.participants}}</span>
+                        <span class="date">{{topic.lastActivity | date:'short'}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/ext/jquery-2.0.0.js"></script>
+    <script src="js/ext/angular.js"></script>
+    <script src="js/ext/angular-resource.js"></script>
+    <script src="js/ext/jquery-ui-1.10.2.custom.js"></script>
+    <script src="js/ext/jquery.layout-latest.js"></script>
+    <script src="js/ext/jquery.autoSuggest.js"></script>
+    <script src="js/ext/jquery.watermark.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/hacks.js"></script>
+</body>
+</html>

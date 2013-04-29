@@ -1,0 +1,160 @@
+
+html {
+    font-family: Helvetica,sans-serif;
+    font-size: 0.9em;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+
+
+
+
+.imageButton {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+
+.imageButton:hover {
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.imageButton:disabled {
+    border: 1px solid transparent;
+    opacity: 0.4;
+}
+
+.rotateAnimation {
+    animation: rotate 3s;
+    -webkit-animation: rotate 3s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-timing-function:linear;
+    -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+
+
+
+
+.header h1 {
+    font-size: 1.4em;
+}
+
+.content {
+    padding: 10px;
+}
+
+.header {
+    background-color: #f4f4f4;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+.textField {
+    border-bottom: 1px solid #b6b6b6;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+    border-top: 0;
+    height: 23px;
+    outline: none;
+    padding: 1px 0 1px 1px;
+    margin: 0;
+    box-shadow:inset 0 1px 2px #888;
+    -webkit-box-shadow:inset 0 1px 2px #888;
+    -moz-box-shadow:inset 0 1px 2px #888;
+}
+
+
+
+div.popup {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    width: 400px;
+    height: 400px;
+
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px #888888;
+    z-index: 10;
+
+    border-radius: 6px;
+    border: 3px solid #9dd7ff;
+}
+
+div.popupFocusedItem {
+    border-radius: 6px;
+    border: 3px solid #9dd7ff;
+    box-shadow: 5px 5px 10px #888888;
+    z-index: 9;
+}
+
+div.popup .header {
+    background-color: #9dd7ff;
+}
+
+.focusedItem {
+    background-color: #9dd7ff;
+}
+
+
+
+.ui-layout-resizer-west {
+    background-image: linear-gradient(left, rgb(122,122,122) 2%, rgb(255,255,255) 67%);
+    background-image: -o-linear-gradient(left, rgb(122,122,122) 2%, rgb(255,255,255) 67%);
+    background-image: -moz-linear-gradient(left, rgb(122,122,122) 2%, rgb(255,255,255) 67%);
+    background-image: -webkit-linear-gradient(left, rgb(122,122,122) 2%, rgb(255,255,255) 67%);
+    background-image: -ms-linear-gradient(left, rgb(122,122,122) 2%, rgb(255,255,255) 67%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left middle,
+        right middle,
+        color-stop(0.02, rgb(122,122,122)),
+        color-stop(0.67, rgb(255,255,255))
+    );
+}
+
+.north {
+    background-color: #d6d6d6;
+}
+
+.west {
+    overflow: auto;
+}
+
+.center {
+    overflow: auto;
+}

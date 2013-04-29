@@ -1,0 +1,46 @@
+.topicList ul {
+    list-style-type: none;
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+}
+
+.topicList ul li .cell {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 30px;
+
+    /* Make sure to draw the line completely */
+    border-bottom: solid 1px lightgray;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.topicList ul li .selected {
+    background-color: #9dd7ff;
+}
+
+.topicList .title {
+    font-weight: bold;
+}
+
+.topicList .participants {
+    position: absolute;
+    bottom: 5px;
+    height: 1.2em;
+    overflow: hidden;
+    left: 10px;
+    margin-right: 120px;
+    word-wrap: break-word;
+}
+
+.topicList .date {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    height: 1.2em;
+    color: gray;
+}
