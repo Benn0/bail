@@ -1,11 +1,14 @@
-<div class="popup">
+<div class="popup emailPopup">
     <div class="header">
-        <h1>New E-Mail <span class="right"><a href data-ng-click="close()">cancel</a></span></h1>
+        <h3>New E-Mail <span class="right"><a href class="btn" data-ng-click="close()">cancel</a></span></h3>
     </div>
     <div class="content">
         <form>
+            <label for="to">To:</label>
             <input id="to" type="text" name="to"/>
-            <input class="textField" id="subject" type="text" name="subject"/>
+
+            <label for="subject">Subject:</label>
+            <input class="input-block-level" id="subject" type="text" name="subject" placeholder="Subject..."/>
         </form>
 
     </div>

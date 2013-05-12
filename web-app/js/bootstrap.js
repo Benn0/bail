@@ -25,12 +25,12 @@ app.factory('popupService', function($http, $rootScope, $compile, $controller) {
         focusedItemCssClass: "focusedItem",
 
         findSettingsFor: function (popupName) {
-            $(this.popups).each(function() {
-                if(this.name === popupName) {
+            return $(this.popups).each(function() {
+                if(this.name == popupName) {
                     return this;
                 }
                 return null;
-            });
+            })[0];
         },
 
         show: function(uiComponent, popupName) {
@@ -39,6 +39,9 @@ app.factory('popupService', function($http, $rootScope, $compile, $controller) {
             var height = uiComponent[0].offsetHeight;
 
             var settings = this.findSettingsFor(popupName);
+            if( ! settings) {
+                throw "No settings found for popup " + popupName;
+            }
             var popup = this.createPopup(position.top, position.left, height, width, uiComponent, settings);
 
             uiComponent.addClass(this.focusedItemCssClass);
@@ -48,7 +51,7 @@ app.factory('popupService', function($http, $rootScope, $compile, $controller) {
             var locals = {
                 $scope: lastScope
             };
-            controller = $controller(settings.controller, locals);
+            var controller = $controller(settings.controller, locals);
             popup.div.children().data('$ngControllerController', controller);
 
             link(lastScope);
@@ -56,6 +59,7 @@ app.factory('popupService', function($http, $rootScope, $compile, $controller) {
 
         createScope: function(popup) {
             var lastScope;
+            var that = this;
 
             lastScope = $rootScope.$new();
 
@@ -65,7 +69,7 @@ app.factory('popupService', function($http, $rootScope, $compile, $controller) {
                 this.popup.div = null;
                 this.popup.itemHighlighter.remove();
                 this.popup.itemHighlighter = null;
-                this.popup.element.removeClass(this.focusedItemCssClass);
+                this.popup.element.removeClass(that.focusedItemCssClass);
                 this.popup.element = null;
                 this.$destroy();
             };
@@ -97,6 +101,7 @@ app.factory('popupService', function($http, $rootScope, $compile, $controller) {
         }
     };
 
+    // TODO: do this dynamically according to the popup settings
     $http.get('partials/emailPopup.html', {}).success(function(data) {
         PopupService.template = data;
     });

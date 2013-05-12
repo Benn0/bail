@@ -90,7 +90,7 @@ function MainCtrl($scope, $rootScope, $http, popupService) {
 
     $scope.newEmail = function() {
         var button = jQuery("#newEmailButton");
-        popupService.show(button);
+        popupService.show(button, "NewEmail");
     };
 }
 MainCtrl.$inject = ['$scope', '$rootScope', '$http', 'popupService'];
@@ -118,6 +118,5 @@ function NewEmailCtrl($scope) {
 
     $scope.popup.div.find("input[name='to']").watermark("Enter recipients here...");
 
-    $scope.popup.div.find("#subject").watermark("Subject...");
 }
 NewEmailCtrl.$inject = ['$scope'];
