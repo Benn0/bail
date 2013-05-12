@@ -11,7 +11,7 @@
  * the fly. It supports keybord navigation (UP + DOWN + RETURN), as well
  * as multiple AutoSuggest fields on the same page.
  *
- * Inspied by the Autocomplete plugin by: Jšrn Zaefferer
+ * Inspied by the Autocomplete plugin by: Jï¿½rn Zaefferer
  * and the Facelist plugin by: Ian Tearle (iantearle.com)
  *
  * This AutoSuggest jQuery plug-in is dual licensed under the MIT and GPL licenses:
@@ -79,8 +79,8 @@
 				input.wrap('<ul class="as-selections" id="as-selections-'+x+'"></ul>').wrap('<li class="as-original" id="as-original-'+x+'"></li>');
 				var selections_holder = $("#as-selections-"+x);
 				var org_li = $("#as-original-"+x);				
-				var results_holder = $('<div class="as-results" id="as-results-'+x+'"></div>').hide();
-				var results_ul =  $('<ul class="as-list"></ul>');
+				var results_holder = $('<div class="autosuggest dropdown" id="as-results-'+x+'"></div>').hide();
+				var results_ul =  $('<ul class="dropdown-menu"></ul>');
 				var values_input = $('<input type="hidden" class="as-values" name="as_values_'+x+'" id="as-values-'+x+'" />');
 				var prefill_value = "";
 				if(typeof opts.preFill == "string"){
@@ -145,7 +145,7 @@
 					} else if(input_focus){
 						$("li.as-selection-item", selections_holder).addClass("blur").removeClass("selected");
 						results_holder.hide();
-					}				
+					}
 				}).keydown(function(e) {
 					// track last key pressed
 					lastKeyPressCode = e.keyCode;
@@ -207,7 +207,7 @@
 						default:
 							if(opts.showResultList){
 								if(opts.selectionLimit && $("li.as-selection-item", selections_holder).length >= opts.selectionLimit){
-									results_ul.html('<li class="as-message">'+opts.limitText+'</li>');
+									results_ul.html('<li class="disabled">'+opts.limitText+'</li>');
 									results_holder.show();
 								} else {
 									if (timeout){ clearTimeout(timeout); }
@@ -277,7 +277,7 @@
 							}	
 						}
 						if(forward){
-							var formatted = $('<li class="as-result-item" id="as-result-item-'+num+'"></li>').click(function(){
+							var formatted = $('<li id="as-result-item-'+num+'"></li>').click(function(){
 									var raw_data = $(this).data("data");
 									var number = raw_data.num;
 									if($("#as-selection-"+number, selections_holder).length <= 0 && !tab_press){
@@ -304,7 +304,7 @@
 								this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<em>$1</em>");
 							}
 							if(!opts.formatList){
-								formatted = formatted.html(this_data[opts.selectedItemProp]);
+								formatted = formatted.html("<a tabindex='-1' href onclick='return false;'>" + this_data[opts.selectedItemProp] + "</a>");
 							} else {
 								formatted = opts.formatList.call(this, this_data, formatted);	
 							}
@@ -316,7 +316,7 @@
 					}
 					selections_holder.removeClass("loading");
 					if(matchCount <= 0){
-						results_ul.html('<li class="as-message">'+opts.emptyText+'</li>');
+						results_ul.html('<li class="disabled">'+opts.emptyText+'</li>');
 					}
 					results_ul.css("width", selections_holder.outerWidth());
 					results_holder.show();

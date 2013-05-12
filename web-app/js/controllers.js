@@ -103,6 +103,8 @@ function NewEmailCtrl($scope) {
     var data = {items: [
         {value: "21", name: "Mick Jagger"},
         {value: "43", name: "Johnny Storm"},
+        {value: "45", name: "Johnny Storm"},
+        {value: "77", name: "Johnny Storm"},
         {value: "46", name: "Richard Hatch"},
         {value: "54", name: "Kelly Slater"},
         {value: "55", name: "Rudy Hamilton"},
