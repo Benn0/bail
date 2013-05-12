@@ -16,6 +16,10 @@ div.autosuggest .dropdown-menu li a em {
     color: #fff;
 }
 
+div.autosuggest .dropdown-menu li {
+    overflow: hidden;
+}
+
 ul.as-selections {
 	list-style-type: none;
 

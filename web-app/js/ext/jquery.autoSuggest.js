@@ -57,11 +57,14 @@
 		if(typeof data == "string") {
 			d_type = "string";
 			var req_string = data;
-		} else {
+		} else if($.isFunction(data)) {
+            d_type = "itemProvider";
+            var itemProvider = data;
+        } else {
 			var org_data = data;
 			for (k in data) if (data.hasOwnProperty(k)) d_count++;
 		}
-		if((d_type == "object" && d_count > 0) || d_type == "string"){
+		if((d_type == "object" && d_count > 0) || d_type == "string" || d_type == "itemProvider"){
 			return this.each(function(x){
 				if(!opts.asHtmlID){
 					x = x+""+Math.floor(Math.random()*100); //this ensures there will be unique IDs on the page if autoSuggest() is called multiple times
@@ -242,7 +245,15 @@
 								for (k in new_data) if (new_data.hasOwnProperty(k)) d_count++;
 								processData(new_data, string); 
 							});
-						} else {
+						} else if(d_type == "itemProvider") {
+                            if(opts.beforeRetrieve){
+                                string = opts.beforeRetrieve.call(this, string);
+                            }
+                            d_count = 0;
+                            var new_data = itemProvider.call(this);
+                            for (k in new_data) if (new_data.hasOwnProperty(k)) d_count++;
+                            processData(new_data, string);
+                        } else {
 							if(opts.beforeRetrieve){
 								string = opts.beforeRetrieve.call(this, string);
 							}

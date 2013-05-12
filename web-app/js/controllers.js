@@ -98,20 +98,14 @@ MainCtrl.$inject = ['$scope', '$rootScope', '$http', 'popupService'];
 
 
 
-function NewEmailCtrl($scope) {
+function NewEmailCtrl($scope, $resource) {
 
-    var data = {items: [
-        {value: "21", name: "Mick Jagger"},
-        {value: "43", name: "Johnny Storm"},
-        {value: "45", name: "Johnny Storm"},
-        {value: "77", name: "Johnny Storm"},
-        {value: "46", name: "Richard Hatch"},
-        {value: "54", name: "Kelly Slater"},
-        {value: "55", name: "Rudy Hamilton"},
-        {value: "79", name: "Michael Jordan"}
-    ]};
+    var EMailList = $resource('/bail/contact/allEmailAddresses');
 
-    $scope.popup.div.find("#to").autoSuggest(data.items, {
+    var list = EMailList.query(null, function() {
+    });
+
+    $scope.popup.div.find("#to").autoSuggest(function() { return list; }, {
             selectedItemProp: "name",
             searchObjProps: "name",
             minChars: 3,
@@ -121,4 +115,4 @@ function NewEmailCtrl($scope) {
     $scope.popup.div.find("input[name='to']").watermark("Enter recipients here...");
 
 }
-NewEmailCtrl.$inject = ['$scope'];
+NewEmailCtrl.$inject = ['$scope', '$resource'];
